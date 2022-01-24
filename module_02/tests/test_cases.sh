@@ -95,9 +95,9 @@ ex00() {
         "$(eval python tests/ex00/ex00_test.py \"functools.reduce\(None, [1]\)\")" \
         $'    [ list(ft_reduce(None, [1])) ]'
 
-        test "python tests/ex00/ex00_test.py \"ft_reduce(lambda u, v: u + v, None)\"" \
-        "$(eval python tests/ex00/ex00_test.py \"functools.reduce\(lambda u, v: u + v, None\)\")" \
-        $'    [ list(ft_reduce(lambda u, v: u + v, None)) ]'
+    test "python tests/ex00/ex00_test.py \"ft_reduce(lambda u, v: u + v, None)\"" \
+    "$(eval python tests/ex00/ex00_test.py \"functools.reduce\(lambda u, v: u + v, None\)\")" \
+    $'    [ list(ft_reduce(lambda u, v: u + v, None)) ]'
 
 }
 
@@ -107,6 +107,16 @@ ex01() {
 var_1: Hi\nend\nend\na: 10\nhello: world\nvar_0: 12\nvar_1: Yes\nvar_2: [0, 0, 0]
 end\nERROR\nend\na: 10\nvar_0: 42\nvar_1: Yes\nvar_2: world\nend'\
           $'    [ main.py output vs subject output ]'
+}
+
+ex02() {
+    test "python $EXO_PATH/ex02/logger.py" \
+          $'boiling...\nCoffee is ready!\nboiling...\nCoffee is ready!\nboiling...\nCoffee is ready!\nboiling...\nCoffee is ready!\nPlease add water!\nPlease add water!\nBlub blub blub...'\
+          $'    [ logger.py output vs subject output ]\n    [ Takes a few seconds, please hold... ]'
+
+    supervise "cat $EXO_PATH/machine.log" \
+        $'Please confirm that contents of "machine.log" correspond to the subject requirements'  
+
 }
 
 # ex02() {

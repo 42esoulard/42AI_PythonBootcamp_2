@@ -17,7 +17,7 @@ TEST_NB=0
 declare -a FUNCTION
 FUNCTION[0]="ex00"
 FUNCTION[1]="ex01"
-# FUNCTION[2]="ex02"
+FUNCTION[2]="ex02"
 # FUNCTION[3]="ex03"
 # FUNCTION[4]="ex04"
 # FUNCTION[5]="ex05"
@@ -26,9 +26,9 @@ echo -e "${MAG}-*-*-*- Welcome to python module01 ssssupertests! -*-*-*-${NC}"
 
 test() {
   TEST_NB=$((TEST_NB+1))
-  RESULT=$(eval $1)
   echo -e "${BOLD}==> Test ${TEST_NB}:\n$1${NC}"
   echo -e "${BOLD}Description:\n$3${NC}"
+  RESULT=$(eval $1)
   echo "> $2"
   echo "< ${RESULT}" ; 
   if [ "$2" == "$RESULT" ]; then
@@ -100,4 +100,4 @@ next_exercise() {
 }
 
 # next_exercise
-${FUNCTION[1]}
+${FUNCTION[2]}
