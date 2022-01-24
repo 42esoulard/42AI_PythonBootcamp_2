@@ -116,6 +116,39 @@ ex02() {
 
     supervise "cat $EXO_PATH/machine.log" \
         $'Please confirm that contents of "machine.log" correspond to the subject requirements'  
+}
+
+ex03() {
+    cp $EXO_PATH/ex03/csvreader.py tests/ex03/csvreader.py
+
+    test "python tests/ex03/csv_test.py \"CsvReader('tests/ex03/good.csv', header=True)\"" \
+          $'[\'"Name"\', \'     "Sex"\', \' "Age"\', \' "Height (in)"\', \' "Weight (lbs)"\']\n[[\'"Name"\', \'     "Sex"\', \' "Age"\', \' "Height (in)"\', \' "Weight (lbs)"\'], [\'"Alex"\', \'       "M"\', \'   41\', \'       74\', \'      170\'], [\'"Bert"\', \'       "M"\', \'   42\', \'       68\', \'      166\'], [\'"Carl"\', \'       "M"\', \'   32\', \'       70\', \'      155\'], [\'"Dave"\', \'       "M"\', \'   39\', \'       72\', \'      167\'], [\'"Elly"\', \'       "F"\', \'   30\', \'       66\', \'      124\'], [\'"Fran"\', \'       "F"\', \'   33\', \'       66\', \'      115\'], [\'"Gwen"\', \'       "F"\', \'   26\', \'       64\', \'      121\'], [\'"Hank"\', \'       "M"\', \'   30\', \'       71\', \'      158\'], [\'"Ivan"\', \'       "M"\', \'   53\', \'       72\', \'      175\'], [\'"Jake"\', \'       "M"\', \'   32\', \'       69\', \'      143\'], [\'"Kate"\', \'       "F"\', \'   47\', \'       69\', \'      139\'], [\'"Luke"\', \'       "M"\', \'   34\', \'       72\', \'      163\'], [\'"Myra"\', \'       "F"\', \'   23\', \'       62\', \'       98\'], [\'"Neil"\', \'       "M"\', \'   36\', \'       75\', \'      160\'], [\'"Omar"\', \'       "M"\', \'   38\', \'       70\', \'      145\'], [\'"Page"\', \'       "F"\', \'   31\', \'       67\', \'      135\'], [\'"Quin"\', \'       "M"\', \'   29\', \'       71\', \'      176\'], [\'"Ruth"\', \'       "F"\', \'   28\', \'       65\', \'      131\']]' \
+          $'    [ CsvReader(\'tests/ex03/good.csv\', header=True) ]'
+
+    test "python tests/ex03/csv_test.py \"CsvReader('tests/ex03/good.csv', skip_top=18, skip_bottom=0)\"" \
+          $'None\n[[\'"Ruth"\', \'       "F"\', \'   28\', \'       65\', \'      131\']]' \
+          $'    [ CsvReader(\'tests/ex03/good.csv\', skip_top=18, skip_bottom=0) ]'
+
+    test "python tests/ex03/csv_test.py \"CsvReader('tests/ex03/good.csv', header = True, skip_top=17, skip_bottom=0)\"" \
+          $'[\'"Name"\', \'     "Sex"\', \' "Age"\', \' "Height (in)"\', \' "Weight (lbs)"\']\n[[\'"Quin"\', \'       "M"\', \'   29\', \'       71\', \'      176\'], [\'"Ruth"\', \'       "F"\', \'   28\', \'       65\', \'      131\']]' \
+          $'    [ CsvReader(\'tests/ex03/good.csv\', header = True, skip_top=17, skip_bottom=0) ]'
+
+    test "python tests/ex03/csv_test.py \"CsvReader('tests/ex03/bad.csv', header=True)\"" \
+          $'File is corrupted or missing' \
+          $'    [ CsvReader(\'tests/ex03/bad.csv\', header=True) ]'
+
+    test "python tests/ex03/csv_test.py \"CsvReader('tests/ex03/bad.csv', skip_top=18, skip_bottom=0)\"" \
+          $'File is corrupted or missing' \
+          $'    [ CsvReader(\'tests/ex03/bad.csv\', skip_top=18, skip_bottom=0) ]'
+
+    test "python tests/ex03/csv_test.py \"CsvReader('tests/ex03/bad.csv', skip_top=17, skip_bottom=0)\"" \
+          $'File is corrupted or missing' \
+          $'    [ CsvReader(\'tests/ex03/bad.csv\', skip_top=17, skip_bottom=0) ]'
+
+    test "python tests/ex03/csv_test.py \"CsvReader('tests/ex03/bidon.csv', skip_top=17, skip_bottom=0)\"" \
+          $'File is corrupted or missing' \
+          $'    [ CsvReader(\'tests/ex03/bidon.csv\', skip_top=17, skip_bottom=0) ]'
+
 
 }
 
