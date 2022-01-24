@@ -1,0 +1,4 @@
+In python: help("modules")
+pip list
+pip show numpy
+Go to https://pypi.org/search/?q=tesseract
