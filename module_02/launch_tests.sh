@@ -16,7 +16,7 @@ TEST_NB=0
 
 declare -a FUNCTION
 FUNCTION[0]="ex00"
-# FUNCTION[1]="ex01"
+FUNCTION[1]="ex01"
 # FUNCTION[2]="ex02"
 # FUNCTION[3]="ex03"
 # FUNCTION[4]="ex04"
@@ -99,4 +99,5 @@ next_exercise() {
         next_exercise
 }
 
-next_exercise
+# next_exercise
+${FUNCTION[1]}

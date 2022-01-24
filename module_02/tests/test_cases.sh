@@ -101,36 +101,13 @@ ex00() {
 
 }
 
-# ex01() {
-#     cp $EXO_PATH/ex01/game.py tests/ex01/game.py
-#     test "python tests/ex01/game_test0.py" \
-#           $'{\'first_name\': \'Arya\', \'is_alive\': True, \'family_name\': \'Stark\', \'house_words\': \'Winter is Coming\'}'\
-#           $'    [ arya = Stark("Arya") ]\n    [ print(arya.__dict__) ]'
-
-#     test "python tests/ex01/game_test1.py" \
-#           $'Winter is Coming' \
-#           $'    [ arya.print_house_words() ]'
-
-#     test "python tests/ex01/game_test2.py" \
-#           $'True\nFalse' \
-#           $'    [ print(arya.is_alive) ]\n    [ arya.die() ]\n    [ print(arya.is_alive) ]'
-
-#     test "python tests/ex01/game_test3.py" \
-#           $'{\'first_name\': \'Elmo\', \'is_alive\': True, \'family_name\': \'Stark\', \'house_words\': \'Winter is Coming\'}'\
-#           $'    [ elmo = Stark("Elmo") ]\n    [ print(elmo.__dict__) ]'
-
-#     test "python tests/ex01/game_test4.py" \
-#           $'Winter is Coming' \
-#           $'    [ elmo.print_house_words() ]'
-
-#     test "python tests/ex01/game_test5.py" \
-#           $'True\nFalse' \
-#           $'    [ print(elmo.is_alive) ]\n    [ elmo.die() ]\n    [ print(elmo.is_alive) ]'
-
-#     test "python tests/ex01/game_test6.py" \
-#           $'A class representing the Stark family. Or when bad things happen to good people.' \
-#           $'    [ print(elmo.__doc__) ]'
-# }
+ex01() {
+    test "python $EXO_PATH/ex01/main.py" \
+          $'var_0: 7\nend\nvar_0: None\nvar_1: []\nend\nvar_0: ft_lol
+var_1: Hi\nend\nend\na: 10\nhello: world\nvar_0: 12\nvar_1: Yes\nvar_2: [0, 0, 0]
+end\nERROR\nend\na: 10\nvar_0: 42\nvar_1: Yes\nvar_2: world\nend'\
+          $'    [ main.py output vs subject output ]'
+}
 
 # ex02() {
 #     cp $EXO_PATH/ex02/vector.py tests/ex02/vector.py
