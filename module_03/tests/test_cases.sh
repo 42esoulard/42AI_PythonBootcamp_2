@@ -162,5 +162,162 @@ Exception: Input should be a numpy array" \
 
     supervise "" \
     $'Please confirm that the 42AI.png image is properly displayed'  
+}
 
+ex02() {
+    cp $EXO_PATH/ex02/ScrapBooker.py tests/ex02/ScrapBooker.py
+
+    test "python tests/ex02/ex02_test.py \"spb.crop(np.arange(0,25).reshape(5,5), (3,1),(1,0))\"" \
+    "[[ 5]
+ [10]
+ [15]]" \
+    $'    [ [[ 0  1  2  3  4]
+     [ [ 5  6  7  8  9] ]
+     [ [10 11 12 13 14] ]
+     [ [15 16 17 18 19] ]
+     [ [20 21 22 23 24]] ]
+     [ spb.crop(arr1, (3,1),(1,0)) ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.crop([[1, 2, 3],[4, 5, 6],[7, 8, 9]], (1,2))\"" \
+    "None" \
+    $'    [ spb.crop([[1, 2, 3],[4, 5, 6],[7, 8, 9]], (1,2)) ]
+     [ not a numpy array ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.crop(np.arange(0,25).reshape(5,5), (1,2,3))\"" \
+    "None" \
+    $'[ spb.crop(np.arange(0,25).reshape(5,5), (1,2,3)) ]
+     [ bad tuple format ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.thin(np.array([['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
+['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
+['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']]), 3,0)\"" \
+    "[['A' 'B' 'D' 'E' 'G' 'H']
+ ['A' 'B' 'D' 'E' 'G' 'H']
+ ['A' 'B' 'D' 'E' 'G' 'H']
+ ['A' 'B' 'D' 'E' 'G' 'H']
+ ['A' 'B' 'D' 'E' 'G' 'H']
+ ['A' 'B' 'D' 'E' 'G' 'H']]" \
+    $'    [ [[\'A\' \'B\' \'C\' \'D\' \'E\' \'F\' \'G\' \'H\' \'I\'] ]
+     [ [\'A\' \'B\' \'C\' \'D\' \'E\' \'F\' \'G\' \'H\' \'I\'] ]
+     [ [\'A\' \'B\' \'C\' \'D\' \'E\' \'F\' \'G\' \'H\' \'I\'] ]
+     [ [\'A\' \'B\' \'C\' \'D\' \'E\' \'F\' \'G\' \'H\' \'I\'] ]
+     [ [\'A\' \'B\' \'C\' \'D\' \'E\' \'F\' \'G\' \'H\' \'I\'] ]
+     [ [\'A\' \'B\' \'C\' \'D\' \'E\' \'F\' \'G\' \'H\' \'I\']] ]
+     [ spb.thin(arr2,3,0) ]'  
+
+        test "python tests/ex02/ex02_test.py \"spb.thin(np.array([['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
+['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],['C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'],
+['D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D'],['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F'],['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G']]), 3, 1)\"" \
+    "[['A' 'A' 'A' 'A' 'A' 'A' 'A' 'A' 'A' 'A']
+ ['B' 'B' 'B' 'B' 'B' 'B' 'B' 'B' 'B' 'B']
+ ['D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D' 'D']
+ ['E' 'E' 'E' 'E' 'E' 'E' 'E' 'E' 'E' 'E']
+ ['G' 'G' 'G' 'G' 'G' 'G' 'G' 'G' 'G' 'G']]" \
+    $'    [ [[\'A\' \'A\' \'A\' \'A\' \'A\' \'A\' \'A\' \'A\' \'A\' \'A\']
+    [ [\'B\' \'B\' \'B\' \'B\' \'B\' \'B\' \'B\' \'B\' \'B\' \'B\']
+    [ [\'C\' \'C\' \'C\' \'C\' \'C\' \'C\' \'C\' \'C\' \'C\' \'C\']
+    [ [\'D\' \'D\' \'D\' \'D\' \'D\' \'D\' \'D\' \'D\' \'D\' \'D\']
+    [ [\'E\' \'E\' \'E\' \'E\' \'E\' \'E\' \'E\' \'E\' \'E\' \'E\']
+    [ [\'F\' \'F\' \'F\' \'F\' \'F\' \'F\' \'F\' \'F\' \'F\' \'F\']
+    [ [\'G\' \'G\' \'G\' \'G\' \'G\' \'G\' \'G\' \'G\' \'G\' \'G\']] ]
+    [ spb.thin(arr3,3,1) ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.thin([[1, 2, 3],[4, 5, 6],[7, 8, 9]], 3, 1)\"" \
+    "None" \
+    $'    [ spb.thin([[1, 2, 3],[4, 5, 6],[7, 8, 9]], 3,1)) ]
+     [ not a numpy array ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.thin(np.array([[1, 2, 3],[1, 2, 3],[1, 2, 3]]), 15, 1)\"" \
+    "None" \
+    $'    [ spb.thin(arr3, 15,1)) ]
+     [ index out of bounds ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.thin(np.array([[1, 2, 3],[1, 2, 3],[1, 2, 3]]), -1, 1)\"" \
+    "None" \
+    $'    [ spb.thin(arr3, -1,1)) ]
+     [ bad index ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.thin(np.array([[1, 2, 3],[1, 2, 3],[1, 2, 3]]), 1, 2)\"" \
+    "None" \
+    $'    [ spb.thin(arr3, 1,2)) ]
+     [ bad axis ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.juxtapose(np.array([[1, 2, 3],[1, 2, 3],[1, 2, 3]]), 3, 1)\"" \
+    "[[1 2 3 1 2 3 1 2 3]
+ [1 2 3 1 2 3 1 2 3]
+ [1 2 3 1 2 3 1 2 3]]" \
+    $'   [ [[1 2 3]
+    [ [1 2 3]
+    [ [1 2 3]] ] 
+    [ spb.juxtapose(arr, 3,1)) ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.juxtapose(np.array([[1, 2, 3],[4, 5, 6],[7, 8, 9]]), 2, 0)\"" \
+    "[[1 2 3]
+ [4 5 6]
+ [7 8 9]
+ [1 2 3]
+ [4 5 6]
+ [7 8 9]]" \
+    $'   [ [[1 2 3]
+    [ [4 5 6]
+    [ [7 8 9]] ] 
+    [ spb.juxtapose(arr, 2,0)) ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.juxtapose(np.array([[1, 2, 3],[4, 5, 6],[7, 8, 9]]), 2, 2)\"" \
+    "None" \
+    $'   [ spb.juxtapose(arr, 2,2)) ] 
+    [ bad axis ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.juxtapose(np.array([[1, 2, 3],[4, 5, 6],[7, 8, 9]]), -1, 0)\"" \
+    "None" \
+    $'   [ spb.juxtapose(arr, -1,0)) ] 
+    [ bad index ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.juxtapose([[1, 2, 3],[4, 5, 6],[7, 8, 9]], -1, 0)\"" \
+    "None" \
+    $'   [ spb.juxtapose(not_a_numpy_arr, 2,0)) ] 
+    [ not a np array ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.mosaic(np.array([[1, 2, 3],[1, 2, 3],[1, 2, 3]]), (3, 1))\"" \
+    "[[1 2 3]
+ [1 2 3]
+ [1 2 3]
+ [1 2 3]
+ [1 2 3]
+ [1 2 3]
+ [1 2 3]
+ [1 2 3]
+ [1 2 3]]" \
+    $'   [ [[1 2 3]
+    [ [1 2 3]
+    [ [1 2 3]] ] 
+    [ spb.mosaic(arr, (3,1))) ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.mosaic(np.array([[1, 2, 3],[4, 5, 6],[7, 8, 9]]), (2, 2))\"" \
+    "[[1 2 3 1 2 3]
+ [4 5 6 4 5 6]
+ [7 8 9 7 8 9]
+ [1 2 3 1 2 3]
+ [4 5 6 4 5 6]
+ [7 8 9 7 8 9]]" \
+    $'   [ [[1 2 3]
+    [ [4 5 6]
+    [ [7 8 9]] ] 
+    [ spb.mosaic(arr, (2,2))) ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.mosaic(np.array([[1, 2, 3],[4, 5, 6],[7, 8, 9]]), (2, 0))\"" \
+    "None" \
+    $'   [ spb.mosaic(arr, (2,0))) ] 
+    [ bad param ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.mosaic(np.array([[1, 2, 3],[4, 5, 6],[7, 8, 9]]), (0, 2))\"" \
+    "None" \
+    $'   [ spb.mosaic(arr, (0,2))) ] 
+    [ bad param ]'
+
+    test "python tests/ex02/ex02_test.py \"spb.mosaic([[1, 2, 3],[4, 5, 6],[7, 8, 9]], (2, 2))\"" \
+    "None" \
+    $'   [ spb.mosaic(bad_arr, (2,2))) ] 
+    [ not a np array ]'
 }
