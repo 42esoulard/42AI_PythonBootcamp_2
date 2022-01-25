@@ -3,6 +3,7 @@ class CsvReader():
     def __init__(self, filename=None, sep=',', header=False,
                  skip_top=0, skip_bottom=0):
         self.filename = filename
+        self.file_obj = None
         self.sep = sep
         self.header = header
         self.skip_top = skip_top
@@ -28,7 +29,7 @@ class CsvReader():
         return self
 
     def __exit__(self, type, value, traceback):
-        try:
+        if self.file_obj:
             self.file_obj.close()
 
     def getdata(self):
