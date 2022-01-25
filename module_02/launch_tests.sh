@@ -19,10 +19,8 @@ FUNCTION[0]="ex00"
 FUNCTION[1]="ex01"
 FUNCTION[2]="ex02"
 FUNCTION[3]="ex03"
-# FUNCTION[4]="ex04"
-# FUNCTION[5]="ex05"
 
-echo -e "${MAG}-*-*-*- Welcome to python module01 ssssupertests! -*-*-*-${NC}"
+echo -e "${MAG}-*-*-*- Welcome to python module_02 ssssupertests! -*-*-*-${NC}"
 
 test() {
   TEST_NB=$((TEST_NB+1))
@@ -99,5 +97,4 @@ next_exercise() {
         next_exercise
 }
 
-# next_exercise
-${FUNCTION[3]}
+next_exercise

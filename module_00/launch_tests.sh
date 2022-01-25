@@ -26,7 +26,7 @@ FUNCTION[8]="ex08"
 FUNCTION[9]="ex09"
 FUNCTION[10]="ex10"
 
-echo -e "${MAG}-*-*-*- Welcome to python module00 ssssupertests! -*-*-*-${NC}"
+echo -e "${MAG}-*-*-*- Welcome to python module_00 ssssupertests! -*-*-*-${NC}"
 
 test() {
   TEST_NB=$((TEST_NB+1))
