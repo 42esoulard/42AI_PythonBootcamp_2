@@ -4,6 +4,9 @@ class Evaluator:
 lengths of every words of a given list weighted \
 by a list a coefs"""
 
+    def __init__(self):
+        pass
+
     def check_params(coefs, words):
         if (not isinstance(coefs, list) or not isinstance(words, list)
             or not all(isinstance(n, (int, float)) for n in coefs)

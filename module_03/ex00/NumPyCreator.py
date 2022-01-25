@@ -3,6 +3,9 @@ import numpy as np
 
 class NumPyCreator:
 
+    def __init__(self):
+        pass
+
     @staticmethod
     def from_list(lst):
         """ Takes a list or nested list and returns its corresponding Numpy
