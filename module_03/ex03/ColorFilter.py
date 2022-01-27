@@ -171,18 +171,15 @@ class ColorFilter:
                   not np.sum(kwargs["weights"]) == 1))):
                 return None
             if filter in ['m', 'mean']:
-                return np.sum(array, axis=2) / 3
-                # print(np.sum(array), np.sum(array.shape))
-                # ratio = np.tile([np.sum(array) / np.sum(array.shape)], 3)
-                # print(ratio)
+                sm = np.sum(array, 2)
+                reshaped = np.reshape(sm, (array.shape[0], array.shape[1], 1))
+                brd = np.broadcast_to(reshaped, (array.shape[0], array.shape[1], 3))
+                ret = brd[:,:,:] / array.shape[2]
             else:
-                ratio = kwargs["weights"]
-            # for i in range()
-
-            return np.dot(array[:,:,:3], ratio)
-
-
-            return array
+                array[:,:,:] *= kwargs["weights"]
+                sm = np.sum(array, 2)
+                ret = np.tile(sm[:,:,None], (1, 1, 3))
+            return ret
 
         except Exception as e:
             print(e)
@@ -191,8 +188,8 @@ class ColorFilter:
 from ImageProcessor import ImageProcessor
 
 imp = ImageProcessor()
-# arr = imp.load("../resources/elon_canaGAN.png")
-# imp.display(arr)
+arr = imp.load("../resources/elon_canaGAN.png")
+imp.display(arr)
 
 cf = ColorFilter()
 # inverted = cf.invert(arr)
@@ -220,4 +217,8 @@ imp.display(gray)
 
 arr = imp.load("../resources/elon_canaGAN.png")
 gray = cf.to_grayscale(arr, 'weighted', weights=[0.2, 0.3, 0.5])
+imp.display(gray)
+
+arr = imp.load("../resources/elon_canaGAN.png")
+gray = cf.to_grayscale(arr, 'weight', weights=[0.2, 0.3, 0.5])
 imp.display(gray)
